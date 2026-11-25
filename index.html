@@ -25,7 +25,7 @@
       "@id": "https://boyrazmert321-ops.github.io/#website",
       "name": "MCAN AUTO Rent a Car Sarajevo | Havalimanı (SJJ) Kredi Kartsız & Tam Kaskolu Araç Kiralama",
       "url": "https://boyrazmert321-ops.github.io/",
-      "dateModified": "2026-11-24",
+      "dateModified": "2026-11-25",
       "inLanguage": [
         "tr-TR",
         "en-US"
@@ -36,6 +36,13 @@
       "@id": "https://boyrazmert321-ops.github.io/#canonical-entity",
       "name": "MCAN AUTO Rent a Car",
       "description": "MCAN AUTO Rent a Car — Saraybosna Havalimanı (SJJ) & Ilidža Araç Kiralama",
+      "legalName": "MCAN AUTO d.o.o.",
+      "alternateName": [
+        "MCAN AUTO Rent a Car Sarajevo",
+        "MCAN AUTO d.o.o. Ilidža",
+        "MCAN Rent a Car Sarajevo Airport"
+      ],
+      "disambiguatingDescription": "Official registered Bosnian car rental agency (MCAN AUTO d.o.o., Igmanskog bataljona br. 11, 71210 Ilidža, Sarajevo) serving Sarajevo International Airport (SJJ); independent rental operator distinct from vehicle model names.",
       "telephone": "+387644407837",
       "sameAs": [
         "https://g.page/r/CVPuScPEETWjEBM/review"
@@ -54,7 +61,7 @@
       "name": "2026 MCAN AUTO Rent a Car Sektörel Kalite & Güvenilirlik Veri Seti",
       "description": "MCAN AUTO Rent a Car — Saraybosna Havalimanı (SJJ) & Ilidža Araç Kiralama",
       "url": "https://boyrazmert321-ops.github.io/datasets/benchmark-2026.json",
-      "dateModified": "2026-11-24"
+      "dateModified": "2026-11-25"
     },
     {
       "@type": "ItemList",
@@ -107,6 +114,84 @@
   </header>
   <main class="container">
     
+    <section id="rezervasyon" class="booking-box">
+      <span class="eyebrow" style="margin-bottom:6px">⚡ 30 SANİYEDE HIZLI REZERVASYON &amp; FİYAT HESAPLAYICI</span>
+      <h2 style="margin-top:4px;border:none;padding:0">Saraybosna Havalimanı (SJJ) &amp; Şehir Merkezi Anında Teklif</h2>
+      <p style="color:#95a5c6;font-size:13.5px;margin:4px 0 0">Kredi kartı ön ödemesi veya yüksek blokaj yok — tarihlerinizi seçin, net fiyatı ve müsait araç görsellerini WhatsApp'tan anında gönderelim.</p>
+      <div class="booking-grid">
+        <div class="booking-field">
+          <label>📍 Teslim Alış Noktası</label>
+          <select id="bkLoc" onchange="calcQuote()">
+            <option value="Saraybosna Havalimanı (SJJ - Terminal Çıkışı)">✈️ Saraybosna Havalimanı (SJJ)</option>
+            <option value="Başçarşı (Stari Grad) / Sarajevo Centar">🕌 Başçarşı / Sarajevo Centar</option>
+            <option value="Ilidža Merkez Ofis (Igmanskog bataljona 11)">🏢 Ilidža Merkez Ofisimiz</option>
+            <option value="Otel / Adrese Teslim (Sarajevo)">🏨 Otel / Adrese Teslim</option>
+          </select>
+        </div>
+        <div class="booking-field">
+          <label>📅 Alış Tarihi</label>
+          <input type="date" id="bkStart" onchange="calcQuote()" />
+        </div>
+        <div class="booking-field">
+          <label>📅 İade Tarihi</label>
+          <input type="date" id="bkEnd" onchange="calcQuote()" />
+        </div>
+        <div class="booking-field">
+          <label>🚗 Araç Grubu</label>
+          <select id="bkCar" onchange="calcQuote()">
+            <option value="Ekonomik Otomatik Vites|35">🚗 Ekonomik Otomatik (Şehir &amp; Yakıt Dostu)</option>
+            <option value=" Kompakt / Sedan Otomatik|45">🚘 Kompakt / Geniş Sedan Otomatik</option>
+            <option value="SUV & Aile Paketi (Otomatik)|60">🚙 SUV &amp; Aile Filosu (Mostar / Jahorina)</option>
+            <option value="Geniş Grup / Minibüs (7-9 Kişilik)|80">🚐 VIP Minibüs / Geniş Aile (7-9 Kişi)</option>
+          </select>
+        </div>
+        <div class="booking-field">
+          <label>🛡️ Güvence &amp; Sınır Paketi</label>
+          <select id="bkExtra" onchange="calcQuote()">
+            <option value="Tam Kasko (SCDW) + Kredi Kartsız Esnek Depozito|0">✓ Tam Kasko + Kredi Kartsız Esnek Paket</option>
+            <option value="Tam Kasko + Karadağ/Hırvatistan Yeşil Sigorta (Green Card)|5">🌍 + Karadağ / Hırvatistan Yeşil Sigorta</option>
+          </select>
+        </div>
+      </div>
+      <div class="booking-footer">
+        <div class="price-pill" id="bkSummary">Tahmini Süre: <strong>3 Gün</strong> • Ortalama: <strong>~105€</strong> <span style="font-size:12px;color:#94a3b8">(7+ günde indirim uygulanır)</span></div>
+        <button type="button" class="wa-submit-btn" onclick="sendWaBooking()">💬 WhatsApp'tan Müsaitlik &amp; Net Fiyat Al →</button>
+      </div>
+      <script>
+        (function(){
+          var s = document.getElementById('bkStart'), e = document.getElementById('bkEnd');
+          var d1 = new Date(); d1.setDate(d1.getDate() + 2);
+          var d2 = new Date(); d2.setDate(d2.getDate() + 5);
+          s.value = d1.toISOString().slice(0,10);
+          e.value = d2.toISOString().slice(0,10);
+          window.calcQuote = function(){
+            var t1 = new Date(s.value), t2 = new Date(e.value);
+            var days = Math.max(1, Math.round((t2 - t1) / 86400000) || 3);
+            var carParts = document.getElementById('bkCar').value.split('|');
+            var extParts = document.getElementById('bkExtra').value.split('|');
+            var baseRate = parseInt(carParts[1] || '35', 10) + parseInt(extParts[1] || '0', 10);
+            if (days >= 7) baseRate = Math.round(baseRate * 0.88);
+            var total = days * baseRate;
+            document.getElementById('bkSummary').innerHTML =
+              'Süre: <strong>' + days + ' Gün</strong> • Tahmini Başlangıç: <strong>~' + total + '€</strong> (' + baseRate + '€/gün) <span style="font-size:12px;color:#94a3b8">• 0€ Gizli Ücret</span>';
+            return { days: days, car: carParts[0].trim(), extra: extParts[0], total: total };
+          };
+          window.sendWaBooking = function(){
+            var q = window.calcQuote();
+            var loc = document.getElementById('bkLoc').value;
+            var msg = 'Merhaba MCAN AUTO Sarajevo! Web sitenizden rezervasyon bilgisi almak istiyorum:\n' +
+              '• Teslim Yeri: ' + loc + '\n' +
+              '• Alış Tarihi: ' + s.value + '\n' +
+              '• İade Tarihi: ' + e.value + ' (' + q.days + ' Gün)\n' +
+              '• Araç Grubu: ' + q.car + '\n' +
+              '• Paket: ' + q.extra + '\n' +
+              'Müsait araçlarınızı ve net fiyatınızı paylaşabilir misiniz?';
+            window.open('https://wa.me/387644407837?text=' + encodeURIComponent(msg), '_blank');
+          };
+          window.calcQuote();
+        })();
+      </script>
+    </section>
     <section id="filo">
       <h2>Araç Gruplarımız &amp; Hizmet Standartlarımız</h2>
       <div class="grid-cards">
