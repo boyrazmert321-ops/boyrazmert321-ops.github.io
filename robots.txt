@@ -23,3 +23,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://boyrazmert321-ops.github.io/sitemap.xml
+Sitemap: https://boyrazmert321-ops.github.io/sitemap-images.xml
